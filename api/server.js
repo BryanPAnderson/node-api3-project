@@ -1,5 +1,5 @@
 const express = require('express');
-const { validatePost, validateUserId, validateUser, logger } = require('./middleware/middleware');
+const { logger } = require('./middleware/middleware');
 const usersRouter = require("./users/users-router");
 const server = express();
 
@@ -9,8 +9,7 @@ const server = express();
 
 server.use(express.json())
 server.use(usersRouter)
-server.use(logger, validatePost, validateUserId);
-server.use(validateUser)
+server.use(logger)
 
 server.use((err, req, res) => {
   console.log(err)

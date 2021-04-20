@@ -1,5 +1,5 @@
 const express = require('express');
-const { validatePost, ValidateUserId, validateUser, validateUserId } = require("../middleware/middleware");
+const { validatePost, validateUser, validateUserId } = require("../middleware/middleware");
 
 const router = express.Router();
 const users = require("./users-model")
@@ -59,7 +59,7 @@ router.get('/:id/posts', validateUserId(), async (req, res, next) => {
     })
 });
 
-router.post('/:id/posts',validateUserId(), ValidateUser(), async (req, res, next) => {
+router.post('/:id/posts',validateUserId(), validateUser(), async (req, res, next) => {
   await users.insert(req.body)
     .then((post) => {
       res.status(200).json(post)
